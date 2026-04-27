@@ -20,8 +20,8 @@ export default {
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-            background: radial-gradient(ellipse at 30% 10%, #2d1b3a 0%, #1a1c3b 40%, #0f1b2d 100%);
-            color: #e0e8ff;
+            background: linear-gradient(135deg, #0f0c1f 0%, #1a163a 30%, #12243a 60%, #0a1f2f 100%);
+            color: #d9e2f0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -31,21 +31,59 @@ export default {
             overflow-x: hidden;
         }
 
-        body::before {
-            content: '';
+        .bg-aurora {
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(180, 140, 255, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 80% 70%, rgba(100, 200, 255, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 50% 90%, rgba(200, 160, 255, 0.08) 0%, transparent 50%);
+            z-index: 0;
+            overflow: hidden;
             pointer-events: none;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            animation: auroraMove 18s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(120, 80, 200, 0.5) 0%, transparent 70%);
+            top: -15%;
+            left: -10%;
+        }
+
+        .aurora-layer:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(30, 140, 200, 0.45) 0%, transparent 70%);
+            bottom: -15%;
+            right: -10%;
+            animation-delay: -6s;
+        }
+
+        .aurora-layer:nth-child(3) {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(80, 180, 160, 0.4) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -12s;
+        }
+
+        @keyframes auroraMove {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.15); }
+            100% { transform: translate(-30px, 25px) scale(0.9); }
         }
 
         .particles {
             position: absolute;
             inset: 0;
-            z-index: 0;
+            z-index: 1;
             overflow: hidden;
             pointer-events: none;
         }
@@ -56,131 +94,150 @@ export default {
             border-radius: 50%;
             filter: blur(0.6px);
             animation: starFloat 14s infinite ease-in-out;
-            box-shadow: 0 0 6px rgba(180, 160, 255, 0.7), 0 0 12px rgba(140, 200, 255, 0.4);
+            box-shadow: 0 0 12px rgba(160, 130, 255, 0.8), 0 0 20px rgba(80, 160, 255, 0.6);
         }
 
         @keyframes starFloat {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 0.2;
-            }
-            15% {
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateY(-25vh) scale(1.3);
-                opacity: 0.9;
-            }
-            85% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-52vh) scale(0.8);
-                opacity: 0.1;
-            }
+            0% { transform: translateY(0) scale(1); opacity: 0.2; }
+            15% { opacity: 0.8; }
+            50% { transform: translateY(-25vh) scale(1.3); opacity: 0.9; }
+            85% { opacity: 0.7; }
+            100% { transform: translateY(-52vh) scale(0.75); opacity: 0.15; }
         }
 
         .container {
             position: relative;
-            z-index: 1;
-            max-width: 720px;
+            z-index: 2;
+            max-width: 680px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
-            border-radius: 28px;
-            padding: 44px 40px;
-            box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.45),
-                        0 0 0 1px rgba(255, 255, 255, 0.12),
-                        inset 0 0 20px rgba(255, 255, 255, 0.03);
-            transition: all 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(20, 18, 35, 0.45);
+            backdrop-filter: blur(32px) saturate(140%);
+            -webkit-backdrop-filter: blur(32px) saturate(140%);
+            border-radius: 32px;
+            padding: 36px 34px 28px;
+            box-shadow: 0 30px 50px -10px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.15),
+                        inset 0 0 50px rgba(255, 255, 255, 0.06);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .container:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.55),
-                        0 0 0 1px rgba(255, 255, 255, 0.18),
-                        inset 0 0 30px rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+            box-shadow: 0 35px 65px -12px rgba(0, 0, 0, 0.6),
+                        0 0 0 1px rgba(255, 255, 255, 0.25),
+                        inset 0 0 60px rgba(255, 255, 255, 0.08);
         }
 
         .container::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 20px;
-            right: 20px;
+            left: 24px;
+            right: 24px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #b794f4, #63b3ed, #b794f4, transparent);
+            background: linear-gradient(90deg, transparent, #9f7aff, #4ea6ff, #6ad4b0, #9f7aff, transparent);
             border-radius: 0 0 10px 10px;
         }
 
         .title {
             text-align: center;
-            margin-bottom: 38px;
-            font-size: 2.1rem;
+            margin-bottom: 28px;
+            font-size: 2rem;
             font-weight: 500;
-            letter-spacing: 3px;
-            background: linear-gradient(135deg, #e2c6ff, #b5deff, #dab6ff);
+            letter-spacing: 2.5px;
+            background: linear-gradient(135deg, #c0b0ff, #7ec8ff, #8adfc8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 15px rgba(180, 150, 255, 0.5);
+            text-shadow: 0 0 25px rgba(160, 140, 255, 0.7);
             position: relative;
-            padding-bottom: 14px;
+            padding-bottom: 8px;
         }
 
         .title::after {
             content: '✨';
             position: absolute;
-            bottom: -18px;
+            bottom: -14px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 1.2rem;
-            filter: drop-shadow(0 0 8px #c4b5fd);
-            animation: twinkle 2.2s infinite alternate;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 0 10px #b8a0ff);
+            animation: twinkle 2.5s infinite alternate;
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.5; transform: translateX(-50%) scale(0.95); }
+            0% { opacity: 0.6; transform: translateX(-50%) scale(0.95); }
             100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
         }
 
         .info-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            background: rgba(25, 22, 45, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-radius: 20px;
-            padding: 24px 28px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-left: 3px solid #a78bfa;
+            padding: 18px 22px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             transition: all 0.3s ease;
-            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 18px -8px rgba(0, 0, 0, 0.35);
         }
 
-        .info-card:last-child {
-            border-left-color: #60a5fa;
+        .info-card.flow-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1.5px;
+            background: linear-gradient(60deg, #b3a0ff, #4ea6ff, #6ad4b0, #4ea6ff, #b3a0ff);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: flowBorder 3s ease infinite;
+            pointer-events: none;
+        }
+
+        @keyframes flowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .info-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-left-width: 4px;
-            transform: translateX(4px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.35);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(35, 30, 60, 0.55);
+            transform: translateX(2px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 时间卡片一行紧凑 */
+        .info-card.time-card {
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .time-card .info-label {
+            margin-bottom: 0;
+            white-space: nowrap;
+        }
+
+        .time-card .info-content {
+            font-size: 1rem;
+            line-height: 1.4;
         }
 
         .info-label {
-            font-size: 1rem;
             font-weight: 600;
             letter-spacing: 1px;
-            color: #b4bdf8;
-            margin-bottom: 12px;
+            color: #b8adff;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             text-transform: uppercase;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
         }
 
         .info-label::before {
@@ -189,129 +246,116 @@ export default {
             width: 7px;
             height: 7px;
             border-radius: 50%;
-            background: #c4b5fd;
+            background: #9f7aff;
             margin-right: 10px;
-            box-shadow: 0 0 8px #a78bfa;
+            box-shadow: 0 0 10px #9f7aff;
         }
 
         .info-content {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: #dde7ff;
+            font-size: 1.1rem;
+            line-height: 1.65;
+            color: #dce3f5;
             word-break: break-word;
             white-space: pre-line;
             font-weight: 400;
         }
 
         .info-content h1, .info-content h2, .info-content h3 {
-            color: #e2ccff;
-            margin: 1.2em 0 0.5em;
+            color: #cdc2ff;
+            margin: 1em 0 0.3em;
             font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        .info-content p {
-            margin-bottom: 1em;
         }
         .info-content strong {
-            color: #f5efff;
+            color: #ece5ff;
             font-weight: 600;
-            text-shadow: 0 0 6px rgba(200, 180, 255, 0.5);
+            text-shadow: 0 0 6px rgba(140, 120, 240, 0.6);
         }
         .info-content em {
-            color: #b6c8ff;
+            color: #b0c6ff;
             font-style: italic;
         }
         .info-content code {
-            background: rgba(20, 18, 40, 0.5);
-            color: #cab8ff;
+            background: rgba(50, 42, 80, 0.6);
+            color: #cfc0ff;
             padding: 2px 8px;
             border-radius: 8px;
-            font-family: 'SF Mono', 'Fira Code', monospace;
             font-size: 0.9em;
         }
         .info-content pre {
-            background: rgba(10, 8, 25, 0.7);
+            background: rgba(15, 12, 35, 0.7);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #dde7ff;
-            padding: 1.2em;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e4dcff;
+            padding: 1em;
             border-radius: 16px;
             overflow-x: auto;
-            margin: 1em 0;
+            margin: 0.8em 0;
         }
         .info-content blockquote {
-            border-left: 4px solid #8b9cf7;
-            margin: 1em 0;
+            border-left: 4px solid #9f7aff;
+            margin: 0.8em 0;
             padding-left: 1.2em;
-            color: #b9c8ff;
+            color: #c1b9f0;
             font-style: italic;
-            background: rgba(255,255,255,0.02);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 0 8px 8px 0;
         }
-        .info-content ul, .info-content ol {
-            padding-left: 1.8em;
-            margin-bottom: 1em;
-        }
-        .info-content li {
-            margin-bottom: 0.5em;
-        }
         .info-content a {
-            color: #b595ff;
-            text-decoration: none;
-            border-bottom: 1px dashed rgba(180, 150, 255, 0.5);
+            color: #b095ff;
+            border-bottom: 1px dashed rgba(150, 120, 240, 0.7);
         }
         .info-content a:hover {
-            color: #d8c4ff;
+            color: #d2c0ff;
             border-bottom-style: solid;
         }
         .info-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1em 0;
-            background: rgba(20, 18, 40, 0.4);
+            background: rgba(30, 25, 55, 0.45);
             border-radius: 14px;
-            overflow: hidden;
-            backdrop-filter: blur(5px);
         }
         .info-content th {
-            background: rgba(120, 100, 210, 0.25);
-            color: #ddceff;
-            padding: 0.8em;
-            font-weight: 500;
+            background: rgba(110, 100, 190, 0.4);
+            color: #d5ccff;
+            font-weight: 600;
         }
         .info-content td {
-            padding: 0.8em;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            color: #ccd9ff;
+            border-bottom: 1px solid rgba(140,130,200,0.2);
+            color: #c7c3f0;
         }
 
         @media (max-width: 640px) {
             .container {
-                padding: 32px 24px;
-                border-radius: 24px;
+                padding: 28px 20px 22px;
+                border-radius: 26px;
             }
             .title {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
+                margin-bottom: 24px;
             }
             .info-card {
-                padding: 20px 18px;
+                padding: 16px 18px;
             }
-        }
-
-        .particles {
-            display: block;
+            .time-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-aurora">
+        <div class="aurora-layer"></div>
+        <div class="aurora-layer"></div>
+        <div class="aurora-layer"></div>
+    </div>
     <div class="particles" id="particles"></div>
     <div class="container">
         <div class="title" id="title">${title}</div>
-        <div class="info-card">
+        <div class="info-card flow-border">
             <div class="info-label">通知内容</div>
             <div class="info-content" id="message">${message}</div>
         </div>
-        <div class="info-card">
+        <div class="info-card time-card flow-border">
             <div class="info-label">时间</div>
             <div class="info-content" id="date">${date}</div>
         </div>
@@ -321,13 +365,13 @@ export default {
         function createParticles() {
             const container = document.getElementById('particles');
             if (!container) return;
-            const count = 28;
+            const count = 30;
             const colors = [
-                'rgba(230, 210, 255, 0.8)', 
-                'rgba(180, 210, 255, 0.7)', 
-                'rgba(210, 190, 255, 0.7)',
-                'rgba(255, 220, 255, 0.6)',
-                'rgba(170, 200, 255, 0.7)'
+                'rgba(200, 190, 255, 0.9)', 
+                'rgba(140, 190, 255, 0.8)', 
+                'rgba(120, 220, 200, 0.8)',
+                'rgba(220, 210, 255, 0.7)',
+                'rgba(170, 200, 245, 0.85)'
             ];
             for (let i = 0; i < count; i++) {
                 const star = document.createElement('div');
@@ -337,15 +381,14 @@ export default {
                 star.style.height = \`\${size}px\`;
                 star.style.background = colors[Math.floor(Math.random() * colors.length)];
                 star.style.left = \`\${Math.random() * 95}%\`;
-                star.style.top = \`\${60 + Math.random() * 40}%\`; // 从下方开始
-                star.style.animationDuration = \`\${12 + Math.random() * 18}s\`;
-                star.style.animationDelay = \`\${Math.random() * 10}s\`;
+                star.style.top = \`\${65 + Math.random() * 35}%\`;
+                star.style.animationDuration = \`\${13 + Math.random() * 17}s\`;
+                star.style.animationDelay = \`\${Math.random() * 8}s\`;
                 star.style.opacity = \`\${0.3 + Math.random() * 0.5}\`;
                 container.appendChild(star);
             }
         }
 
-        // Markdown 渲染
         function renderMarkdown() {
             const messageEl = document.getElementById('message');
             if (messageEl && typeof marked !== 'undefined') {
